@@ -1,0 +1,4 @@
+# ignore the node_module
+node_modules/
+
+#other entires to ignore

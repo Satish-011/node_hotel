@@ -1,4 +1,5 @@
 # ignore the node_module
 node_modules/
+.env
 
 #other entires to ignore

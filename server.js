@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = 8000;
 
+//Dot env file
+require("dotenv").config();
+
 // DB connection
 const database = require("./db");
 
@@ -17,6 +20,8 @@ const Menuroutes = require("./routes/menuroutes");
 app.use("/person", personRoutes);
 app.use("/menu", Menuroutes);
 
-app.listen(port, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
   console.log("server started!!!");
 });

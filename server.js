@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 8000;
 
 //Dot env file
 require("dotenv").config();
@@ -12,6 +11,16 @@ const database = require("./db");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//Middleware Functions
+const LogRequest = (req, res, next) => {
+  console.log(
+    `[${new Date().toLocaleString()}] Request Made to:${req.originalUrl}`
+  );
+  next(); // Move on the next phase
+};
+
+app.use(LogRequest);
+
 // routes
 const personRoutes = require("./routes/Personroutes");
 const Menuroutes = require("./routes/menuroutes");
@@ -19,6 +28,10 @@ const Menuroutes = require("./routes/menuroutes");
 // use the routes
 app.use("/person", personRoutes);
 app.use("/menu", Menuroutes);
+
+app.get("/", (req, res) => {
+  res.send("welcome!!");
+});
 
 const PORT = process.env.PORT || 3000;
 

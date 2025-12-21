@@ -3,14 +3,8 @@ const mongoose = require("mongoose");
 //dot env file
 require("dotenv").config();
 
-// define the mongodb connection
-//const mongoURL = "mongodb://localhost:27017/myDatabase";
-
-// connection with atlas
-//const atlas ="mongodb+srv://satish03062005_db_user:abcde1234@cluster0.wq05nl7.mongodb.net/";
-
-//const mongoURL=process.env.DB_URL_local;
-const mongoURL = process.env.DB_URL;
+const mongoURL = process.env.DB_URL_local;
+//const mongoURL = process.env.DB_URL;
 // connect to mongodb
 mongoose.connect(mongoURL);
 

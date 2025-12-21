@@ -12,7 +12,7 @@ const personSchema = new mongoose.Schema({
   },
   work: {
     type: String,
-    enum: ["Chef", "Manager", "Waiter"], // allowed values
+    enum: ["chef", "manager", "waiter"], // allowed values
     required: true,
   },
   mobile: {
@@ -32,9 +32,21 @@ const personSchema = new mongoose.Schema({
   salary: {
     type: Number,
   },
+  username: {
+    required: true,
+    type: String,
+  },
+  password: {
+    required: true,
+    type: String,
+  },
 });
+//password checking
+personSchema.methods.comparePassword = async function (candidatePassword) {
+  return this.password === candidatePassword;
+};
 
 // create person model
-const Person = mongoose.model("Person", personSchema);
+const Person = mongoose.models.Person || mongoose.model("Person", personSchema);
 
 module.exports = Person;

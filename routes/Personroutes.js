@@ -4,7 +4,6 @@ const router = express.Router();
 //model
 const Person = require("../models/person");
 
-
 //create
 router.post("/", async (req, res) => {
   try {

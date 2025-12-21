@@ -1,3 +1,4 @@
+//express
 const express = require("express");
 const app = express();
 
@@ -11,6 +12,11 @@ const database = require("./db");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//authentication'
+const passport = require("./auth");
+app.use(passport.initialize());
+const localAuthMiddleware = passport.authenticate("local", { session: false });
+
 //Middleware Functions
 const LogRequest = (req, res, next) => {
   console.log(
@@ -18,7 +24,6 @@ const LogRequest = (req, res, next) => {
   );
   next(); // Move on the next phase
 };
-
 app.use(LogRequest);
 
 // routes
@@ -26,7 +31,7 @@ const personRoutes = require("./routes/Personroutes");
 const Menuroutes = require("./routes/menuroutes");
 
 // use the routes
-app.use("/person", personRoutes);
+app.use("/person", localAuthMiddleware, personRoutes);
 app.use("/menu", Menuroutes);
 
 app.get("/", (req, res) => {
